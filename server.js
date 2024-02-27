@@ -1,4 +1,5 @@
 const express = require("express")
+const env=require("dotenv").config()
 const { open } = require("sqlite")
 const sqlite3 = require("sqlite3")
 const path = require("path")
@@ -7,6 +8,7 @@ const tambolaTicketGenerator = require("./ticketGenerator")
 const filePath = path.join(__dirname, "ticketStore.db")
 const app = express()
 app.use(express.json())
+
 
 let DB = null;
 // Used to create schema for ticketStore table in SQLite Database
@@ -107,8 +109,8 @@ async function pushAllTickets(tickets) {
 
 
 try {
-    app.listen(3001, () => {
-        console.log("Server listening at port: http://localhost:3000")
+    app.listen(process.env.PORT, () => {
+        console.log("Server listening at port: http://localhost:3000",app)
     })
 }
 catch (e) {
